@@ -5,26 +5,22 @@ import model.FullTime;
 import model.NhanVien;
 import model.PartTime;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Manager_NhanVien {
-    NhanVien[] nhanViens = new NhanVien[0];
     Scanner scanner = new Scanner(System.in);
+    ArrayList<NhanVien> nhanViens = new ArrayList<>();
 
 
     public void show() {
-        for (int i = 0; i < nhanViens.length; i++) {
-            System.out.println(nhanViens[i].toString());
+        for (int i = 0; i < nhanViens.size(); i++) {
+            System.out.println(nhanViens.get(i).toString());
         }
     }
 
     public void add(NhanVien nhanVien) {
-        NhanVien[] newArr = new NhanVien[nhanViens.length + 1];
-        for (int i = 0; i < nhanViens.length; i++) {
-            newArr[i] = nhanViens[i];
-        }
-        newArr[newArr.length - 1] = nhanVien;
-        nhanViens = newArr;
+      nhanViens.add(nhanVien);
     }
 
     public NhanVien taoNhanVien(boolean isFullTime) {
@@ -46,8 +42,8 @@ public class Manager_NhanVien {
     }
 
     public int findIndexByName(String name) {
-        for (int i = 0; i < nhanViens.length; i++) {
-            if (name.equals(nhanViens[i].getName())) {
+        for (int i = 0; i < nhanViens.size(); i++) {
+            if (name.equals(nhanViens.get(i).getName())) {
                 return i;
             }
         }
@@ -63,11 +59,11 @@ public class Manager_NhanVien {
             int choice = Integer.parseInt(scanner.nextLine());
             if (choice == 1) {
                 NhanVien full = taoNhanVien(true);
-                nhanViens[index] = full;
+                nhanViens.set(index,full);
             }
             if (choice == 2) {
                 NhanVien part = taoNhanVien(false);
-                nhanViens[index] = part;
+                nhanViens.set(index,part);
             }
         }
     }
@@ -75,21 +71,13 @@ public class Manager_NhanVien {
     public void delete(String name) {
         int index = findIndexByName(name);
         if (index != -1) {
-            NhanVien[] newArr = new NhanVien[nhanViens.length - 1];
-            for (int i = 0; i < newArr.length; i++) {
-                if (i < index) {
-                    newArr[i] = nhanViens[i];
-                } else {
-                    newArr[i] = nhanViens[i + 1];
-                }
-            }
-            nhanViens = newArr;
+            nhanViens.remove(index);
         }
     }
 
     public void tinhLuong() {
-        for (int i = 0; i < nhanViens.length; i++) {
-            System.out.println(nhanViens[i].getName() + " CÓ LƯƠNG LÀ : " + nhanViens[i].tinhLuong());
+        for (int i = 0; i < nhanViens.size(); i++) {
+            System.out.println(nhanViens.get(i).getName() + " CÓ LƯƠNG LÀ : " + nhanViens.get(i).tinhLuong());
         }
     }
 }

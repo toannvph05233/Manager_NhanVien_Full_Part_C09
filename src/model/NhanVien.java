@@ -1,6 +1,6 @@
 package model;
 
-public abstract class NhanVien {
+public abstract class NhanVien implements Comparable<NhanVien> {
     private String name;
     private int age;
     private String gender;
@@ -47,5 +47,10 @@ public abstract class NhanVien {
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(NhanVien o) {
+        return this.age - o.getAge();
     }
 }
