@@ -1,6 +1,7 @@
 package manager;
 
 
+import io.ReadAndWrite;
 import model.FullTime;
 import model.NhanVien;
 import model.PartTime;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class Manager_NhanVien {
     Scanner scanner = new Scanner(System.in);
-    ArrayList<NhanVien> nhanViens = new ArrayList<>();
+    ArrayList<NhanVien> nhanViens = (ArrayList<NhanVien>) ReadAndWrite.read();
 
 
     public void show() {
@@ -21,6 +22,7 @@ public class Manager_NhanVien {
 
     public void add(NhanVien nhanVien) {
       nhanViens.add(nhanVien);
+      ReadAndWrite.write(nhanViens);
     }
 
     public NhanVien taoNhanVien(boolean isFullTime) {
@@ -65,13 +67,16 @@ public class Manager_NhanVien {
                 NhanVien part = taoNhanVien(false);
                 nhanViens.set(index,part);
             }
+            ReadAndWrite.write(nhanViens);
         }
+
     }
 
     public void delete(String name) {
         int index = findIndexByName(name);
         if (index != -1) {
             nhanViens.remove(index);
+            ReadAndWrite.write(nhanViens);
         }
     }
 

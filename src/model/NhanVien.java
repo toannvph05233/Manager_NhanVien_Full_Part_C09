@@ -1,6 +1,8 @@
 package model;
 
-public abstract class NhanVien implements Comparable<NhanVien> {
+import java.io.Serializable;
+
+public abstract class NhanVien implements Comparable<NhanVien>, Serializable {
     private String name;
     private int age;
     private String gender;
